@@ -4,12 +4,12 @@
 	"freespace": "15360",
 	"gift": "0",
 	"rtmp": {
-		"url": "rtmp://live-push.bilivideo.com/live-bvc/",
-		"code": "?streamname=live_8383487_5734926&key=33b002f6bf6dbe4c722df28e17b653a1&schedule=rtmp"
+		"url": "",
+		"code": ""
 	},
 	"danmu": {
-		"cookie": "LIVE_BUVID=AUTO8115898913369323; sid=jcbwxx4w; CURRENT_FNVAL=80; rpdid=|(J~R~u~u~|J0J'ulm|kum)lR; _uuid=A5664AD0-FA9E-FFBE-831A-B9F03E08357502509infoc; buvid3=B3601D09-C568-42AE-85BC-77068EBBB48F40937infoc; blackside_state=1; DedeUserID=8383487; DedeUserID__ckMd5=eb7f9d610d81e966; SESSDATA=bee01bcb%2C1621858334%2C9dd9d*b1; bili_jct=c99627a2afa03b0bd6d05eca13c3eb82; fingerprint3=8d59a352d912ad05ea3e6d9e77994c41; fingerprint=8febac121893d314ece9f9482627aef7; fingerprint_s=eb85d77214ec1ee9fd265f97de0c56b3; bp_video_offset_8383487=465943860732082590; bp_t_offset_8383487=465961379901635582; PVID=1; buivd_fp=B3601D09-C568-42AE-85BC-77068EBBB48F40937infoc; buvid_fp_plain=B3601D09-C568-42AE-85BC-77068EBBB48F40937infoc; CURRENT_QUALITY=80; _dfcaptcha=71f8c837f822c9a7edd27f22dc4c0083",
-		"token": "c99627a2afa03b0bd6d05eca13c3eb82",
+		"cookie": "",
+		"token": "",
 		"roomid": "7164303",
 		"size": "20"
 	},
