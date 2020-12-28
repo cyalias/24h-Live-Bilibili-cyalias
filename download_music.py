@@ -1,4 +1,4 @@
-#!/home/cyalias/Pyenv/env_1/bin/python
+#!/home/cypi/Pyenv/env_1/bin/python
 # -*- coding: UTF-8 -*-
 # @Time         :2020/12/24
 # @Author       :Cyalias
@@ -152,8 +152,8 @@ def get_song_lyric(song_id):
         else:
             return lyric
 
+
 def down_music(item, user):
-    global a_name
     headers = {
         'authority': 'music.163.com',
         'user-agent': User_Agent,
@@ -193,10 +193,12 @@ def down_music(item, user):
         print('歌曲（' + song_name + '）下载成功')
         lyric_file_path = path + "/static/lyric/" + filename
         #如果没有歌词，就不保存歌曲歌词动作
-        if song_lyric != "null" and song_url != "None":
-            save_file(lyric_file_path + '.lrc', song_lyric, 'w')
-            print('歌曲（' + song_name + '）歌词下载成功')
-
+        if song_lyric != "null" and song_url != "None" and song_url is not None:
+            try:
+                save_file(lyric_file_path + '.lrc', song_lyric, 'w')
+                print('歌曲（' + song_name + '）歌词下载成功')
+            except TypeError:
+                pass
         lyric = lyric_file_path + '.lrc'
         assmaker.make_ass(filename, '当前网易云id：' + str(song_id) + "\\N歌曲:" + song_name + "\\N歌手:" + song_ar + "\\N点播人:" + user, path, lyric)  # 生成字幕
         assmaker.make_playlist(filename, str(song_id) + "," + song_name + "," + song_ar + ',' + user, path)
@@ -217,13 +219,17 @@ def down_music(item, user):
 
 
 # 通过歌曲列表循环下载歌曲
-def get_download_info(song_list, arname, user):
+def get_download_info(song_list, arname, user, songname):
     """下载音乐"""
     if len(song_list) > 0:
         song_list = json.loads(song_list)['result']['songs']
-
         if arname == "null":
-            item = json.dumps(song_list[0])
+            i = 0
+            for item in song_list:
+                if item['fee'] != 1:
+                    item = json.dumps(song_list[i])
+                    break
+                i = i+1
             down_music(item, user)
 
         else:
@@ -231,7 +237,7 @@ def get_download_info(song_list, arname, user):
             for i, item in enumerate(song_list):
                 item = json.dumps(item)
                 song_ar = json.loads(str(item))['ar'][0]['name']
-                if song_ar == arname:
+                if song_ar == arname and json.loads(str(item))['fee'] != 1:
                     a = 1
                     down_music(item, user)
                     break
@@ -242,6 +248,7 @@ def get_download_info(song_list, arname, user):
                 Danmu.send_dm("没找到[" + str(arname) + "]唱的<<" + str(song_name) + ">>这首歌！")
     else:
         print("没有搜到")
+        Danmu.send_dm("没有搜到<<" + str(songname) + ">>这首歌")
 
 
 #　保存歌曲
@@ -273,7 +280,7 @@ def search_info(songname, arname, user):
     random_param = get_random()
     param = get_final_param(d, random_param)
     song_list = get_music_list(param['params'], param['encSecKey'])
-    get_download_info(song_list, arname, user)
+    get_download_info(song_list, arname, user, songname)
 
 
 def transact(a_dict):

@@ -1,4 +1,4 @@
-#!/home/cyalias/Pyenv/env_1/bin/python
+#!/home/cypi/Pyenv/env_1/bin/python
 # -*- coding: UTF-8 -*-
 # @Time         :2020/12/24
 # @Author       :Cyalias
@@ -9,6 +9,8 @@ import threading
 import Danmu
 import os
 import json
+import download_music
+import Push_rtmp
 
 
 config = json.load(open('./Config.json', encoding='utf-8'))
@@ -43,13 +45,11 @@ def df():
 
 
 def pr():
-    import Push_rtmp
     while True:
         Push_rtmp.run()
 
 
 def dm():
-    import download_music
     while True:
         download_music.run()
 
